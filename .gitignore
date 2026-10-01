@@ -1,0 +1,11 @@
+node_modules/
+.edge-profile/
+diagnostics/
+dist/
+release/
+evaluation.config.json
+*.exe
+*.pdb
+*.log
+.DS_Store
+Thumbs.db

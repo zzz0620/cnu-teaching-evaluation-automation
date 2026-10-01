@@ -1,0 +1,37 @@
+name: Release Windows EXE
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build:exe
+      - name: Create release and upload assets
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create $env:GITHUB_REF_NAME `
+            release/cnu-teaching-evaluation-automation.exe `
+            release/evaluation.config.example.json `
+            release/SHA256SUMS.txt `
+            release/LICENSE.txt `
+            release/NOTICE.md `
+            release/THIRD_PARTY_NOTICES.md `
+            release/third-party-licenses.zip `
+            --repo $env:GITHUB_REPOSITORY `
+            --title $env:GITHUB_REF_NAME `
+            --generate-notes

@@ -1,0 +1,34 @@
+{
+  "name": "cnu-teaching-evaluation-automation",
+  "version": "1.0.0",
+  "description": "Configurable Microsoft Edge automation for university teaching evaluations.",
+  "private": true,
+  "license": "MIT",
+  "author": "zzz",
+  "type": "commonjs",
+  "bin": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zzz0620/cnu-teaching-evaluation-automation.git"
+  },
+  "scripts": {
+    "start": "node src/index.js run",
+    "check": "node src/index.js check",
+    "self-test": "node src/index.js self-test",
+    "diagnose": "node src/index.js diagnose",
+    "test": "node tests/mock-flow.test.js",
+    "bundle": "esbuild src/index.js --bundle --platform=node --format=cjs --target=node22 --outfile=dist/index.cjs",
+    "build:exe": "npm run bundle && node scripts/patch-bundle.js && node --experimental-sea-config sea-config.json && powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-exe.ps1"
+  },
+  "dependencies": {
+    "chromium-bidi": "^0.5.24",
+    "playwright-core": "^1.61.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1",
+    "postject": "^1.0.0-alpha.6"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

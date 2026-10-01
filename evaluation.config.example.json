@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 2,
+  "startUrl": "https://urp.cnu.edu.cn/eams/homeExt.action#",
+  "edgeProfileDir": ".edge-profile",
+  "manualLogin": true,
+  "closeBrowserOnExit": false,
+  "slowMoMs": 100,
+  "timeouts": {
+    "pageReadyMs": 20000,
+    "formReadyMs": 15000,
+    "idleRetryMs": 5000,
+    "confirmationMs": 4000
+  },
+  "workflow": {
+    "navigationSteps": [
+      {
+        "name": "从首页进入教学评价",
+        "pageKeywords": ["首页"],
+        "clickTexts": ["教学评价", "学生评教", "教学质量评价"],
+        "nextPageKeywords": ["评价", "评教"],
+        "optional": false
+      }
+    ],
+    "taskList": {
+      "pageKeywords": ["课程", "教师", "评价"],
+      "entryTexts": ["进入评价", "开始评价", "评价", "评教", "未评"],
+      "incompleteKeywords": ["未评", "未提交", "待评价", "进行中"],
+      "completedKeywords": ["已评", "已提交", "已完成", "完成评价"],
+      "emptyKeywords": ["暂无数据", "没有未评", "全部完成"],
+      "rowSelectors": ["tr", "li", "[role=\"row\"]", ".item", ".list-group-item"]
+    }
+  },
+  "evaluation": {
+    "preferredOptionTexts": ["非常满意", "优秀", "完全同意", "非常同意", "A", "5"],
+    "rejectedOptionTexts": ["不满意", "很差", "完全不同意"],
+    "fallbackRadioChoice": "last",
+    "checkboxMode": "first",
+    "selectMode": "first-non-empty",
+    "textAnswers": ["老师授课认真负责，课程内容清晰，课堂组织有序，学习收获较大。"],
+    "fillOptionalTextInputs": false
+  },
+  "submission": {
+    "mode": "manual",
+    "submitButtonTexts": ["提交", "保存并提交", "完成评价"],
+    "confirmButtonTexts": ["确定", "确认", "是", "OK"]
+  },
+  "runtime": {
+    "keepRunning": true,
+    "maxEvaluations": 0,
+    "diagnosticsDir": "diagnostics"
+  }
+}
