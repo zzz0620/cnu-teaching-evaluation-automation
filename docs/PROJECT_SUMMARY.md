@@ -11,6 +11,8 @@
 - 默认保留人工登录/验证码与人工最终提交，避免保存凭据和未经检查的提交。
 - 提供 Node.js SEA 单文件构建、SHA-256 输出和 GitHub Release 工作流。
 - 补齐 README、配置指南、MIT 许可、权属、第三方声明、安全和贡献文档。
+- 源码已公开至 `https://github.com/zzz0620/cnu-teaching-evaluation-automation`。
+- Windows 独立程序已发布至 `https://github.com/zzz0620/cnu-teaching-evaluation-automation/releases/tag/v1.0.0`。
 
 ## 验证状态
 
