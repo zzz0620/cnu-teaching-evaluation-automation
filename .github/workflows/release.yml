@@ -19,12 +19,19 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build:exe
-      - name: Create release and upload assets
+      - name: Create or update release
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create $env:GITHUB_REF_NAME `
+          gh release view $env:GITHUB_REF_NAME --repo $env:GITHUB_REPOSITORY 2>$null
+          if ($LASTEXITCODE -ne 0) {
+            gh release create $env:GITHUB_REF_NAME `
+              --repo $env:GITHUB_REPOSITORY `
+              --title $env:GITHUB_REF_NAME `
+              --generate-notes
+          }
+          gh release upload $env:GITHUB_REF_NAME `
             release/cnu-teaching-evaluation-automation.exe `
             release/evaluation.config.example.json `
             release/SHA256SUMS.txt `
@@ -33,5 +40,4 @@ jobs:
             release/THIRD_PARTY_NOTICES.md `
             release/third-party-licenses.zip `
             --repo $env:GITHUB_REPOSITORY `
-            --title $env:GITHUB_REF_NAME `
-            --generate-notes
+            --clobber
